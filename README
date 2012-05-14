@@ -3,7 +3,7 @@ NAME
     versions during automated testing
 
 VERSION
-    version 0.002
+    version 0.003
 
 SYNOPSIS
       # in dist.ini
@@ -16,9 +16,9 @@ DESCRIPTION
     'suggests', etc.).
 
     If a MYMETA.json file exists and CPAN::Meta is installed on the testing
-    machine, MYMETA.json will be examined for prerequisites as it would
-    include any dynamic prerequisites. Otherwise, a static list of
-    prerequisites is used, generated when distribution tarball was built.
+    machine, MYMETA.json will be examined for prerequisites in addition, as
+    it would include any dynamic prerequisites not set in the distribution
+    metadata.
 
     Versions are reported based on the result of "parse_version" from
     ExtUtils::MakeMaker, which means prerequisite modules are not actually
