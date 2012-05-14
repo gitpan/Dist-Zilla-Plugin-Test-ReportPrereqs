@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Test::ReportPrereqs;
 # ABSTRACT: Report on prerequisite versions during automated testing
-our $VERSION = '0.001'; # VERSION
+our $VERSION = '0.002'; # VERSION
 
 use Dist::Zilla 4 ();
 use File::Slurp qw/read_file write_file/;
@@ -46,7 +46,7 @@ Dist::Zilla::Plugin::Test::ReportPrereqs - Report on prerequisite versions durin
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -148,7 +148,7 @@ else {
 }
 
 my @modules = qw(
-  INSERT_MODULE_LIST_HERE 
+INSERT_MODULE_LIST_HERE
 );
 
 # replace modules with dynamic results from MYMETA.json if we can
