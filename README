@@ -3,11 +3,13 @@ NAME
     versions during automated testing
 
 VERSION
-    version 0.003
+    version 0.004
 
 SYNOPSIS
       # in dist.ini
       [Test::ReportPrereqs]
+      include = Acme::FYI
+      exclude = Acme::Dont::Care
 
 DESCRIPTION
     This Dist::Zilla plugin adds a t/00-report-prereqs.t test file. If
@@ -25,6 +27,16 @@ DESCRIPTION
     loaded (which avoids various edge cases with certain modules). Parse
     errors are reported as "undef". If a module is not installed, "missing"
     is reported instead of a version string.
+
+CONFIGURATION
+  include
+    An "include" attribute can be specified (multiple times) to add modules
+    to the report. This can be useful if there is a module in the dependency
+    chain that is problematic but is not directly required by this project.
+
+  exclude
+    An "exclude" attribute can be specified (multiple times) to remove
+    modules from the report (if you had a reason to do so).
 
 SEE ALSO
     Other Dist::Zilla::Plugins do similar things in slightly different ways
