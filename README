@@ -3,7 +3,7 @@ NAME
     versions during automated testing
 
 VERSION
-    version 0.004
+    version 0.005
 
 SYNOPSIS
       # in dist.ini
@@ -12,10 +12,9 @@ SYNOPSIS
       exclude = Acme::Dont::Care
 
 DESCRIPTION
-    This Dist::Zilla plugin adds a t/00-report-prereqs.t test file. If
-    AUTOMATED_TESTING is true, it reports the version of all modules listed
-    in the distribution metadata prerequisites (including 'recommends',
-    'suggests', etc.).
+    This Dist::Zilla plugin adds a t/00-report-prereqs.t test file. It
+    reports the version of all modules listed in the distribution metadata
+    prerequisites (including 'recommends', 'suggests', etc.).
 
     If a MYMETA.json file exists and CPAN::Meta is installed on the testing
     machine, MYMETA.json will be examined for prerequisites in addition, as
@@ -55,8 +54,8 @@ SEE ALSO
 SUPPORT
   Bugs / Feature Requests
     Please report any bugs or feature requests through the issue tracker at
-    <http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Test
-    -ReportPrereqs>. You will be notified automatically of any progress on
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Tes
+    t-ReportPrereqs>. You will be notified automatically of any progress on
     your issue.
 
   Source Code
@@ -65,7 +64,7 @@ SUPPORT
 
     <https://github.com/dagolden/dist-zilla-plugin-test-reportprereqs>
 
-      git clone https://github.com/dagolden/dist-zilla-plugin-test-reportprereqs.git
+      git clone git://github.com/dagolden/dist-zilla-plugin-test-reportprereqs.git
 
 AUTHOR
     David Golden <dagolden@cpan.org>

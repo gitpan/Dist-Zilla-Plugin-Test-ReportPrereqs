@@ -14,9 +14,11 @@ my %WriteMakefileArgs = (
   "BUILD_REQUIRES" => {
     "Capture::Tiny" => 0,
     "Dist::Zilla::Tester" => 0,
+    "ExtUtils::MakeMaker" => 0,
     "File::Find" => 0,
     "File::Temp" => 0,
     "File::pushd" => 0,
+    "List::Util" => 0,
     "Path::Class" => 0,
     "Test::Harness" => 0,
     "Test::More" => "0.96"
@@ -38,7 +40,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.004",
+  "VERSION" => "0.005",
   "test" => {
     "TESTS" => "t/*.t"
   }

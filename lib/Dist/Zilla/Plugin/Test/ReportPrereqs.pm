@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Test::ReportPrereqs;
 # ABSTRACT: Report on prerequisite versions during automated testing
-our $VERSION = '0.004'; # VERSION
+our $VERSION = '0.005'; # VERSION
 
 use Dist::Zilla 4 ();
 use File::Slurp qw/read_file write_file/;
@@ -59,9 +59,6 @@ __PACKAGE__->meta->make_immutable;
 
 1;
 
-
-
-
 =pod
 
 =head1 NAME
@@ -70,7 +67,7 @@ Dist::Zilla::Plugin::Test::ReportPrereqs - Report on prerequisite versions durin
 
 =head1 VERSION
 
-version 0.004
+version 0.005
 
 =head1 SYNOPSIS
 
@@ -81,9 +78,9 @@ version 0.004
 
 =head1 DESCRIPTION
 
-This L<Dist::Zilla> plugin adds a t/00-report-prereqs.t test file.  If
-AUTOMATED_TESTING is true, it reports the version of all modules listed in the
-distribution metadata prerequisites (including 'recommends', 'suggests', etc.).
+This L<Dist::Zilla> plugin adds a t/00-report-prereqs.t test file. It reports
+the version of all modules listed in the distribution metadata prerequisites
+(including 'recommends', 'suggests', etc.).
 
 If a MYMETA.json file exists and L<CPAN::Meta> is installed on the testing
 machine, MYMETA.json will be examined for prerequisites in addition, as it
@@ -139,7 +136,7 @@ L<Dist::Zilla::Plugin::Test::ReportVersions::Tiny> -- static list only, loads mo
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests through the issue tracker
-at L<http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Test-ReportPrereqs>.
+at L<https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Test-ReportPrereqs>.
 You will be notified automatically of any progress on your issue.
 
 =head2 Source Code
@@ -149,7 +146,7 @@ public review and contribution under the terms of the license.
 
 L<https://github.com/dagolden/dist-zilla-plugin-test-reportprereqs>
 
-  git clone https://github.com/dagolden/dist-zilla-plugin-test-reportprereqs.git
+  git clone git://github.com/dagolden/dist-zilla-plugin-test-reportprereqs.git
 
 =head1 AUTHOR
 
@@ -165,7 +162,6 @@ This is free software, licensed under:
 
 =cut
 
-
 __DATA__
 ___[ t/00-report-prereqs.t ]___
 #!perl
@@ -173,18 +169,11 @@ ___[ t/00-report-prereqs.t ]___
 use strict;
 use warnings;
 
-use Test::More;
+use Test::More tests => 1;
 
 use ExtUtils::MakeMaker;
 use File::Spec::Functions;
 use List::Util qw/max/;
-
-if ( $ENV{AUTOMATED_TESTING} ) {
-  plan tests => 1;
-}
-else {
-  plan skip_all => '$ENV{AUTOMATED_TESTING} not set';
-}
 
 my @modules = qw(
 INSERT_MODULE_LIST_HERE
@@ -219,7 +208,7 @@ for my $mod ( @modules ) {
     push @reports, ["missing", $mod];
   }
 }
-    
+
 if ( @reports ) {
   my $vl = max map { length $_->[0] } @reports;
   my $ml = max map { length $_->[1] } @reports;

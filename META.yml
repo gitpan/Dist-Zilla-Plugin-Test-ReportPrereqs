@@ -5,16 +5,18 @@ author:
 build_requires:
   Capture::Tiny: 0
   Dist::Zilla::Tester: 0
+  ExtUtils::MakeMaker: 0
   File::Find: 0
   File::Temp: 0
   File::pushd: 0
+  List::Util: 0
   Path::Class: 0
   Test::Harness: 0
   Test::More: 0.96
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300015, CPAN::Meta::Converter version 2.120630'
+generated_by: 'Dist::Zilla version 4.300029, CPAN::Meta::Converter version 2.120921'
 license: apache
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -31,7 +33,7 @@ no_index:
 provides:
   Dist::Zilla::Plugin::Test::ReportPrereqs:
     file: lib/Dist/Zilla/Plugin/Test/ReportPrereqs.pm
-    version: 0.004
+    version: 0.005
 requires:
   Dist::Zilla: 4
   Dist::Zilla::Plugin::InlineFiles: 0
@@ -43,7 +45,7 @@ requires:
   strict: 0
   warnings: 0
 resources:
-  bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Test-ReportPrereqs
-  homepage: https://github.com/dagolden/dist-zilla-plugin-test-reportprereqs
-  repository: https://github.com/dagolden/dist-zilla-plugin-test-reportprereqs.git
-version: 0.004
+  bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Test-ReportPrereqs
+  homepage: https://metacpan.org/release/Dist-Zilla-Plugin-Test-ReportPrereqs
+  repository: git://github.com/dagolden/dist-zilla-plugin-test-reportprereqs.git
+version: 0.005
