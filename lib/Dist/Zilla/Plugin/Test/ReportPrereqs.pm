@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Test::ReportPrereqs;
 # ABSTRACT: Report on prerequisite versions during automated testing
-our $VERSION = '0.005'; # VERSION
+our $VERSION = '0.006'; # VERSION
 
 use Dist::Zilla 4 ();
 use File::Slurp qw/read_file write_file/;
@@ -43,6 +43,7 @@ sub after_build {
 sub _module_list {
   my $self = shift;
   my $prereqs = $self->zilla->prereqs->as_string_hash;
+  delete $prereqs->{develop};
   my %uniq = map {$_ => 1} map { keys %$_ } map { values %$_ } values %$prereqs;
 
   if( my @includes = $self->included_modules ){
@@ -67,7 +68,7 @@ Dist::Zilla::Plugin::Test::ReportPrereqs - Report on prerequisite versions durin
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -80,7 +81,8 @@ version 0.005
 
 This L<Dist::Zilla> plugin adds a t/00-report-prereqs.t test file. It reports
 the version of all modules listed in the distribution metadata prerequisites
-(including 'recommends', 'suggests', etc.).
+(including 'recommends', 'suggests', etc.).  However, any 'develop' prereqs
+are not reported (unless they show up in another category).
 
 If a MYMETA.json file exists and L<CPAN::Meta> is installed on the testing
 machine, MYMETA.json will be examined for prerequisites in addition, as it
@@ -185,6 +187,7 @@ my $cpan_meta = "CPAN::Meta";
 if ( -f "MYMETA.json" && eval "require $cpan_meta" ) { ## no critic
   if ( my $meta = eval { CPAN::Meta->load_file("MYMETA.json") } ) {
     my $prereqs = $meta->prereqs;
+    delete $prereqs->{develop};
     my %uniq = map {$_ => 1} map { keys %$_ } map { values %$_ } values %$prereqs;
     $uniq{$_} = 1 for @modules; # don't lose any static ones
     @modules = sort keys %uniq;

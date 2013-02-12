@@ -3,7 +3,7 @@ NAME
     versions during automated testing
 
 VERSION
-    version 0.005
+    version 0.006
 
 SYNOPSIS
       # in dist.ini
@@ -14,7 +14,9 @@ SYNOPSIS
 DESCRIPTION
     This Dist::Zilla plugin adds a t/00-report-prereqs.t test file. It
     reports the version of all modules listed in the distribution metadata
-    prerequisites (including 'recommends', 'suggests', etc.).
+    prerequisites (including 'recommends', 'suggests', etc.). However, any
+    'develop' prereqs are not reported (unless they show up in another
+    category).
 
     If a MYMETA.json file exists and CPAN::Meta is installed on the testing
     machine, MYMETA.json will be examined for prerequisites in addition, as
