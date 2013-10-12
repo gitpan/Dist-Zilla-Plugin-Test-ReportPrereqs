@@ -11,16 +11,19 @@ use List::Util qw/max/;
 
 my @modules = qw(
   Capture::Tiny
+  Cwd
   Dist::Zilla
   Dist::Zilla::Plugin::InlineFiles
   Dist::Zilla::Role::AfterBuild
   Dist::Zilla::Tester
   ExtUtils::MakeMaker
-  File::Find
   File::Slurp
+  File::Spec
   File::Spec::Functions
   File::Temp
   File::pushd
+  IO::Handle
+  IPC::Open3
   List::Util
   Moose
   Path::Class

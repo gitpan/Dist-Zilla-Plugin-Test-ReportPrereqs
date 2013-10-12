@@ -3,7 +3,7 @@ NAME
     versions during automated testing
 
 VERSION
-    version 0.006
+    version 0.007
 
 SYNOPSIS
       # in dist.ini
@@ -29,6 +29,10 @@ DESCRIPTION
     errors are reported as "undef". If a module is not installed, "missing"
     is reported instead of a version string.
 
+    Additionally, if CPAN::Meta is installed, unfulfilled required
+    prerequisites are reported after the list of all versions based on
+    either MYMETA (preferably) or META (fallback).
+
 CONFIGURATION
   include
     An "include" attribute can be specified (multiple times) to add modules
@@ -38,6 +42,10 @@ CONFIGURATION
   exclude
     An "exclude" attribute can be specified (multiple times) to remove
     modules from the report (if you had a reason to do so).
+
+  verify_prereqs
+    When set, installed versions of all 'requires' prerequisites are
+    verified against those specified. Defaults to true.
 
 SEE ALSO
     Other Dist::Zilla::Plugins do similar things in slightly different ways
@@ -50,26 +58,32 @@ SEE ALSO
         YAML::Tiny, reads prereqs only from META.yml, and attempts to load
         them with "require"
 
-    *   Dist::Zilla::Plugin::Test::ReportVersions::Tiny -- static list only,
-        loads modules with "require"
+    *   Dist::Zilla::Plugin::ReportVersions::Tiny -- static list only, loads
+        modules with "require"
 
 SUPPORT
   Bugs / Feature Requests
     Please report any bugs or feature requests through the issue tracker at
-    <https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Tes
-    t-ReportPrereqs>. You will be notified automatically of any progress on
-    your issue.
+    <https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs/issues
+    >. You will be notified automatically of any progress on your issue.
 
   Source Code
     This is open source software. The code repository is available for
     public review and contribution under the terms of the license.
 
-    <https://github.com/dagolden/dist-zilla-plugin-test-reportprereqs>
+    <https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs>
 
-      git clone git://github.com/dagolden/dist-zilla-plugin-test-reportprereqs.git
+      git clone https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs.git
 
 AUTHOR
     David Golden <dagolden@cpan.org>
+
+CONTRIBUTORS
+    *   Karen Etheridge <ether@cpan.org>
+
+    *   Randy Stauner <randy@magnificent-tears.com>
+
+    *   Yanick Champoux <yanick@babyl.dyndns.org>
 
 COPYRIGHT AND LICENSE
     This software is Copyright (c) 2012 by David Golden.
