@@ -3,7 +3,7 @@ NAME
     versions during automated testing
 
 VERSION
-    version 0.007
+    version 0.008
 
 SYNOPSIS
       # in dist.ini

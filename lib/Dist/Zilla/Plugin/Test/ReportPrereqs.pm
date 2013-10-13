@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Test::ReportPrereqs;
 # ABSTRACT: Report on prerequisite versions during automated testing
-our $VERSION = '0.007'; # VERSION
+our $VERSION = '0.008'; # VERSION
 
 use Dist::Zilla 4 ();
 use File::Slurp qw/read_file write_file/;
@@ -77,7 +77,7 @@ Dist::Zilla::Plugin::Test::ReportPrereqs - Report on prerequisite versions durin
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
@@ -244,12 +244,13 @@ if ( -f $source && eval "require $cpan_meta" ) { ## no critic
     # If verifying, merge 'requires' only for major phases
     if ( INSERT_VERIFY_PREREQS_CONFIG ) {
       $prereqs = $meta->effective_prereqs; # get the object, not the hash
-      eval "require $cpan_meta_req"; ## no critic
-      $all_requires = CPAN::Meta::Requirements->new;
-      for my $phase ( qw/configure build test runtime/ ) {
-        $all_requires->add_requirements(
-          $prereqs->requirements_for($phase, 'requires')
-        );
+      if (eval "require $cpan_meta_req; 1") { ## no critic
+        $all_requires = $cpan_meta_req->new;
+        for my $phase ( qw/configure build test runtime/ ) {
+          $all_requires->add_requirements(
+            $prereqs->requirements_for($phase, 'requires')
+          );
+        }
       }
     }
   }
@@ -257,6 +258,7 @@ if ( -f $source && eval "require $cpan_meta" ) { ## no critic
 
 my @reports = [qw/Version Module/];
 my @dep_errors;
+my $req_hash = defined($all_requires) ? $all_requires->as_string_hash : {};
 
 for my $mod ( @modules ) {
   next if $mod eq 'perl';
@@ -270,7 +272,7 @@ for my $mod ( @modules ) {
     push @reports, [$ver, $mod];
 
     if ( INSERT_VERIFY_PREREQS_CONFIG && $all_requires ) {
-      my $req = $all_requires->requirements_for_module($mod);
+      my $req = $req_hash->{$mod};
       if ( defined $req && length $req ) {
         if ( ! eval { version->parse($ver) } ) {
           push @dep_errors, "$mod version '$ver' cannot be parsed (version '$req' required)";
@@ -286,7 +288,7 @@ for my $mod ( @modules ) {
     push @reports, ["missing", $mod];
 
     if ( INSERT_VERIFY_PREREQS_CONFIG && $all_requires ) {
-      my $req = $all_requires->requirements_for_module($mod);
+      my $req = $req_hash->{$mod};
       if ( defined $req && length $req ) {
         push @dep_errors, "$mod is not installed (version '$req' required)";
       }
