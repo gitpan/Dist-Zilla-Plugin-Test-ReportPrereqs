@@ -23,6 +23,7 @@ my %WriteMakefileArgs = (
     "Dist::Zilla" => 4,
     "Dist::Zilla::Plugin::InlineFiles" => 0,
     "Dist::Zilla::Role::AfterBuild" => 0,
+    "Dist::Zilla::Role::PrereqSource" => 0,
     "File::Slurp" => 0,
     "File::Spec::Functions" => 0,
     "Moose" => 0,
@@ -34,17 +35,13 @@ my %WriteMakefileArgs = (
     "Cwd" => 0,
     "Dist::Zilla::Tester" => 0,
     "ExtUtils::MakeMaker" => 0,
-    "File::Spec" => 0,
-    "File::Temp" => 0,
     "File::pushd" => 0,
-    "IO::Handle" => 0,
-    "IPC::Open3" => 0,
     "List::Util" => 0,
     "Path::Class" => 0,
     "Test::Harness" => 0,
     "Test::More" => "0.96"
   },
-  "VERSION" => "0.008",
+  "VERSION" => "0.009",
   "test" => {
     "TESTS" => "t/*.t"
   }

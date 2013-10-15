@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Test::ReportPrereqs;
 # ABSTRACT: Report on prerequisite versions during automated testing
-our $VERSION = '0.008'; # VERSION
+our $VERSION = '0.009'; # VERSION
 
 use Dist::Zilla 4 ();
 use File::Slurp qw/read_file write_file/;
@@ -12,7 +12,7 @@ use File::Spec::Functions;
 
 use Moose;
 extends 'Dist::Zilla::Plugin::InlineFiles';
-with 'Dist::Zilla::Role::AfterBuild';
+with 'Dist::Zilla::Role::AfterBuild', 'Dist::Zilla::Role::PrereqSource';
 
 sub mvp_multivalue_args {
     return qw( include exclude );
@@ -33,6 +33,19 @@ has verify_prereqs => (
     isa     => 'Bool',
     default => 1,
 );
+
+sub register_prereqs {
+    my $self = shift;
+
+    $self->zilla->register_prereqs(
+        {
+            phase => 'test',
+            type  => 'recommends',
+        },
+        'CPAN::Meta'               => '0',
+        'CPAN::Meta::Requirements' => 0,
+    );
+}
 
 sub after_build {
     my ( $self, $opt ) = @_;
@@ -77,7 +90,7 @@ Dist::Zilla::Plugin::Test::ReportPrereqs - Report on prerequisite versions durin
 
 =head1 VERSION
 
-version 0.008
+version 0.009
 
 =head1 SYNOPSIS
 
@@ -109,6 +122,7 @@ are reported after the list of all versions based on either F<MYMETA>
 
 =for Pod::Coverage after_build
 mvp_multivalue_args
+register_prereqs
 
 =head1 CONFIGURATION
 
@@ -300,7 +314,7 @@ if ( @reports ) {
   my $vl = max map { length $_->[0] } @reports;
   my $ml = max map { length $_->[1] } @reports;
   splice @reports, 1, 0, ["-" x $vl, "-" x $ml];
-  diag "Versions for all modules listed in $source (including optional ones):\n",
+  diag "\nVersions for all modules listed in $source (including optional ones):\n",
     map {sprintf("  %*s %*s\n",$vl,$_->[0],-$ml,$_->[1])} @reports;
 }
 

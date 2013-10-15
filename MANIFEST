@@ -15,10 +15,10 @@ cpanfile
 dist.ini
 lib/Dist/Zilla/Plugin/Test/ReportPrereqs.pm
 perlcritic.rc
-t/00-compile.t
 t/00-report-prereqs.t
 t/report.t
 tidyall.ini
+xt/author/00-compile.t
 xt/author/critic.t
 xt/author/pod-spell.t
 xt/release/distmeta.t

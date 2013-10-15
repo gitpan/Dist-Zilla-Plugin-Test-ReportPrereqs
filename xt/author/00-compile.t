@@ -18,7 +18,7 @@ use File::Temp;
 local $ENV{HOME} = File::Temp::tempdir( CLEANUP => 1 );
 
 
-my $inc_switch = q[-Mblib];
+my $inc_switch = q[-Ilib];
 
 use File::Spec;
 use IPC::Open3;

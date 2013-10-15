@@ -7,11 +7,7 @@ build_requires:
   Cwd: 0
   Dist::Zilla::Tester: 0
   ExtUtils::MakeMaker: 0
-  File::Spec: 0
-  File::Temp: 0
   File::pushd: 0
-  IO::Handle: 0
-  IPC::Open3: 0
   List::Util: 0
   Path::Class: 0
   Test::Harness: 0
@@ -36,11 +32,12 @@ no_index:
 provides:
   Dist::Zilla::Plugin::Test::ReportPrereqs:
     file: lib/Dist/Zilla/Plugin/Test/ReportPrereqs.pm
-    version: 0.008
+    version: 0.009
 requires:
   Dist::Zilla: 4
   Dist::Zilla::Plugin::InlineFiles: 0
   Dist::Zilla::Role::AfterBuild: 0
+  Dist::Zilla::Role::PrereqSource: 0
   File::Slurp: 0
   File::Spec::Functions: 0
   Moose: 0
@@ -51,7 +48,7 @@ resources:
   bugtracker: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs/issues
   homepage: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs
   repository: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs.git
-version: 0.008
+version: 0.009
 x_authority: cpan:DAGOLDEN
 x_contributors:
   - 'Karen Etheridge <ether@cpan.org>'
