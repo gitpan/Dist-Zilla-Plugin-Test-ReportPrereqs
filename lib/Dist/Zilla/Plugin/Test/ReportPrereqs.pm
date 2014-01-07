@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Test::ReportPrereqs;
 # ABSTRACT: Report on prerequisite versions during automated testing
-our $VERSION = '0.010'; # VERSION
+our $VERSION = '0.011'; # VERSION
 
 use Dist::Zilla 4 ();
 use File::Slurp qw/read_file write_file/;
@@ -82,7 +82,7 @@ __PACKAGE__->meta->make_immutable;
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -90,7 +90,7 @@ Dist::Zilla::Plugin::Test::ReportPrereqs - Report on prerequisite versions durin
 
 =head1 VERSION
 
-version 0.010
+version 0.011
 
 =head1 SYNOPSIS
 
@@ -260,7 +260,7 @@ if ( -f $source && eval "require $cpan_meta" ) { ## no critic
       $prereqs = $meta->effective_prereqs; # get the object, not the hash
       if (eval "require $cpan_meta_req; 1") { ## no critic
         $all_requires = $cpan_meta_req->new;
-        for my $phase ( qw/configure build test runtime/ ) {
+        for my $phase ( qw/configure build test runtime develop/ ) {
           $all_requires->add_requirements(
             $prereqs->requirements_for($phase, 'requires')
           );

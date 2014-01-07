@@ -1,5 +1,12 @@
 Revision history for Dist-Zilla-Plugin-Test-ReportPrereqs
 
+0.011     2014-01-07 11:46:22 America/New_York
+
+  [Fixed]
+
+  - now also verifying develop prereqs, when AUTHOR_TESTING is set
+    (Karen Etheridge)
+
 0.010     2013-10-16 17:02:34 America/New_York
 
   [Fixed]

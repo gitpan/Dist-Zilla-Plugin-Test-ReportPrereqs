@@ -15,7 +15,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.17
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300039, CPAN::Meta::Converter version 2.132830'
+generated_by: 'Dist::Zilla version 5.008, CPAN::Meta::Converter version 2.132830'
 license: apache
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -32,7 +32,7 @@ no_index:
 provides:
   Dist::Zilla::Plugin::Test::ReportPrereqs:
     file: lib/Dist/Zilla/Plugin/Test/ReportPrereqs.pm
-    version: 0.010
+    version: 0.011
 requires:
   Dist::Zilla: 4
   Dist::Zilla::Plugin::InlineFiles: 0
@@ -48,7 +48,7 @@ resources:
   bugtracker: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs/issues
   homepage: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs
   repository: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs.git
-version: 0.010
+version: 0.011
 x_authority: cpan:DAGOLDEN
 x_contributors:
   - 'Karen Etheridge <ether@cpan.org>'
