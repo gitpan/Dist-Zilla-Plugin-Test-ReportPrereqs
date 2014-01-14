@@ -4,15 +4,13 @@ use warnings;
 
 package Dist::Zilla::Plugin::Test::ReportPrereqs;
 # ABSTRACT: Report on prerequisite versions during automated testing
-our $VERSION = '0.011'; # VERSION
+our $VERSION = '0.012'; # VERSION
 
 use Dist::Zilla 4 ();
-use File::Slurp qw/read_file write_file/;
-use File::Spec::Functions;
 
 use Moose;
 extends 'Dist::Zilla::Plugin::InlineFiles';
-with 'Dist::Zilla::Role::AfterBuild', 'Dist::Zilla::Role::PrereqSource';
+with 'Dist::Zilla::Role::InstallTool', 'Dist::Zilla::Role::PrereqSource';
 
 sub mvp_multivalue_args {
     return qw( include exclude );
@@ -47,17 +45,26 @@ sub register_prereqs {
     );
 }
 
-sub after_build {
-    my ( $self, $opt ) = @_;
-    my $build_root = $opt->{build_root};
-    my $test_file  = catfile( $build_root, qw/t 00-report-prereqs.t/ );
-    my $guts       = read_file($test_file);
-    my $list       = join( "\n", map { "  $_" } $self->_module_list );
+sub _munge_test {
+    my ( $self, $file ) = @_;
+    my $guts = $file->content;
+    my $list = join( "\n", map { "  $_" } $self->_module_list );
     $guts =~ s{INSERT_VERSION_HERE}{$self->VERSION || '<self>'}e;
     $guts =~ s{INSERT_MODULE_LIST_HERE}{$list};
     $guts =~ s{INSERT_EXCLUDED_MODULES_HERE}{join(' ', $self->excluded_modules)}ge;
     $guts =~ s{INSERT_VERIFY_PREREQS_CONFIG}{$self->verify_prereqs ? 1 : 0}ge;
-    write_file( $test_file, $guts );
+    $file->content($guts);
+}
+
+sub setup_installer {
+    my ( $self, $opt ) = @_;
+    for my $file ( @{ $self->zilla->files } ) {
+        if ( 't/00-report-prereqs.t' eq $file->name ) {
+            return $self->_munge_test($file);
+        }
+    }
+    $self->log_fatal(
+        'Did not find t/00-report-prereqs.t in zilla files cache, inline files broken?');
 }
 
 sub _module_list {
@@ -90,7 +97,7 @@ Dist::Zilla::Plugin::Test::ReportPrereqs - Report on prerequisite versions durin
 
 =head1 VERSION
 
-version 0.011
+version 0.012
 
 =head1 SYNOPSIS
 
@@ -120,7 +127,7 @@ Additionally, if L<CPAN::Meta> is installed, unfulfilled required prerequisites
 are reported after the list of all versions based on either F<MYMETA>
 (preferably) or F<META> (fallback).
 
-=for Pod::Coverage after_build
+=for Pod::Coverage setup_installer
 mvp_multivalue_args
 register_prereqs
 
@@ -193,6 +200,10 @@ David Golden <dagolden@cpan.org>
 =item *
 
 Karen Etheridge <ether@cpan.org>
+
+=item *
+
+Kent Fredric <kentfredric@gmail.com>
 
 =item *
 

@@ -16,6 +16,9 @@ dagolden
 Karen
 Etheridge
 ether
+Kent
+Fredric
+kentfredric
 Randy
 Stauner
 randy
