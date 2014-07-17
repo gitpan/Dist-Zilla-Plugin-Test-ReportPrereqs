@@ -3,7 +3,7 @@ NAME
     versions during automated testing
 
 VERSION
-    version 0.013
+    version 0.014
 
 SYNOPSIS
       # in dist.ini
@@ -12,11 +12,11 @@ SYNOPSIS
       exclude = Acme::Dont::Care
 
 DESCRIPTION
-    This Dist::Zilla plugin adds a t/00-report-prereqs.t test file. It
-    reports the version of all modules listed in the distribution metadata
-    prerequisites (including 'recommends', 'suggests', etc.). However, any
-    'develop' prereqs are not reported (unless they show up in another
-    category).
+    This Dist::Zilla plugin adds a t/00-report-prereqs.t test file and an
+    accompanying t/00-report-prereqs.dd data file. It reports the version of
+    all modules listed in the distribution metadata prerequisites (including
+    'recommends', 'suggests', etc.). However, any 'develop' prereqs are not
+    reported (unless they show up in another category).
 
     If a MYMETA.json file exists and CPAN::Meta is installed on the testing
     machine, MYMETA.json will be examined for prerequisites in addition, as
@@ -79,6 +79,8 @@ AUTHOR
     David Golden <dagolden@cpan.org>
 
 CONTRIBUTORS
+    *   Brendan Byrd <Perl@ResonatorSoft.org>
+
     *   Karen Etheridge <ether@cpan.org>
 
     *   Kent Fredric <kentfredric@gmail.com>

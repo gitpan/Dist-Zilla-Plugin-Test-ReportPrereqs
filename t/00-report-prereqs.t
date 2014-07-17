@@ -43,58 +43,62 @@ my %exclude = map {; $_ => 1 } qw(
 
 # Add static prereqs to the included modules list
 my $static_prereqs = do { my $x = {
-       'develop' => {
-                      'requires' => {
-                                      'Test::Pod' => '1.41',
-                                      'IO::Handle' => '0',
-                                      'Dist::Zilla::PluginBundle::DAGOLDEN' => '0.053',
-                                      'Pod::Coverage::TrustPod' => '0',
-                                      'Dist::Zilla' => '5.012',
-                                      'File::Spec' => '0',
-                                      'Test::Pod::Coverage' => '1.08',
-                                      'Test::CPAN::Meta' => '0',
-                                      'Test::More' => '0',
-                                      'IPC::Open3' => '0',
-                                      'File::Temp' => '0'
-                                    }
-                    },
        'configure' => {
                         'requires' => {
                                         'ExtUtils::MakeMaker' => '6.17'
                                       }
                       },
-       'test' => {
-                   'recommends' => {
-                                     'CPAN::Meta::Requirements' => '2.120900',
-                                     'CPAN::Meta' => '0'
-                                   },
-                   'requires' => {
-                                   'Dist::Zilla::Tester' => '0',
-                                   'Path::Class' => '0',
-                                   'ExtUtils::MakeMaker' => '0',
-                                   'File::pushd' => '0',
-                                   'List::Util' => '0',
-                                   'File::Spec::Functions' => '0',
-                                   'Cwd' => '0',
-                                   'Capture::Tiny' => '0',
-                                   'version' => '0',
-                                   'Test::More' => '0.96',
-                                   'Test::Harness' => '0'
-                                 }
-                 },
+       'develop' => {
+                      'requires' => {
+                                      'Dist::Zilla' => '5',
+                                      'Dist::Zilla::PluginBundle::DAGOLDEN' => '0.053',
+                                      'File::Spec' => '0',
+                                      'File::Temp' => '0',
+                                      'IO::Handle' => '0',
+                                      'IPC::Open3' => '0',
+                                      'Pod::Coverage::TrustPod' => '0',
+                                      'Test::CPAN::Meta' => '0',
+                                      'Test::More' => '0',
+                                      'Test::Pod' => '1.41',
+                                      'Test::Pod::Coverage' => '1.08',
+                                      'Test::Spelling' => '0.12'
+                                    }
+                    },
        'runtime' => {
                       'requires' => {
-                                      'Dist::Zilla::Role::InstallTool' => '0',
-                                      'strict' => '0',
-                                      'Dist::Zilla::Role::PrereqSource' => '0',
                                       'Data::Dumper' => '0',
-                                      'Dist::Zilla::Plugin::InlineFiles' => '0',
-                                      'Moose' => '0',
-                                      'warnings' => '0',
+                                      'Data::Section' => '0.200002',
                                       'Dist::Zilla' => '4',
-                                      'perl' => '5.006'
+                                      'Dist::Zilla::File::FromCode' => '0',
+                                      'Dist::Zilla::File::InMemory' => '0',
+                                      'Dist::Zilla::Role::FileGatherer' => '0',
+                                      'Dist::Zilla::Role::PrereqSource' => '0',
+                                      'Moose' => '0',
+                                      'Sub::Exporter::ForMethods' => '0',
+                                      'perl' => '5.006',
+                                      'strict' => '0',
+                                      'warnings' => '0'
                                     }
-                    }
+                    },
+       'test' => {
+                   'recommends' => {
+                                     'CPAN::Meta' => '0',
+                                     'CPAN::Meta::Requirements' => '2.120900'
+                                   },
+                   'requires' => {
+                                   'Capture::Tiny' => '0',
+                                   'Cwd' => '0',
+                                   'Dist::Zilla::Tester' => '0',
+                                   'ExtUtils::MakeMaker' => '0',
+                                   'File::Spec::Functions' => '0',
+                                   'File::pushd' => '0',
+                                   'List::Util' => '0',
+                                   'Path::Class' => '0',
+                                   'Test::Harness' => '0',
+                                   'Test::More' => '0.96',
+                                   'version' => '0'
+                                 }
+                 }
      };
   $x;
  };
