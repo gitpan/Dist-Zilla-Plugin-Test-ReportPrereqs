@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Test::ReportPrereqs;
 # ABSTRACT: Report on prerequisite versions during automated testing
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.016'; # VERSION
 
 use Dist::Zilla 4 ();
 
@@ -196,7 +196,7 @@ Dist::Zilla::Plugin::Test::ReportPrereqs - Report on prerequisite versions durin
 
 =head1 VERSION
 
-version 0.015
+version 0.016
 
 =head1 SYNOPSIS
 
@@ -457,7 +457,7 @@ for my $phase ( qw(configure build test runtime develop) ) {
                 push @reports, [$mod, $want, $have];
 
                 if ( $DO_VERIFY_PREREQS && $HAS_CPAN_META && $type eq 'requires' ) {
-                    if ( $have !~ /\a$lax_version_re\Z/ ) {
+                    if ( $have !~ /\A$lax_version_re\z/ ) {
                         push @dep_errors, "$mod version '$have' cannot be parsed ($req_string)";
                     }
                     elsif ( ! $full_prereqs->requirements_for( $phase, $type )->accepts_module( $mod => $have ) ) {

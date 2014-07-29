@@ -35,7 +35,7 @@ no_index:
 provides:
   Dist::Zilla::Plugin::Test::ReportPrereqs:
     file: lib/Dist/Zilla/Plugin/Test/ReportPrereqs.pm
-    version: '0.015'
+    version: '0.016'
 requires:
   Data::Dumper: '0'
   Data::Section: '0.200002'
@@ -53,7 +53,7 @@ resources:
   bugtracker: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs/issues
   homepage: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs
   repository: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs.git
-version: '0.015'
+version: '0.016'
 x_authority: cpan:DAGOLDEN
 x_contributors:
   - 'Brendan Byrd <Perl@ResonatorSoft.org>'
