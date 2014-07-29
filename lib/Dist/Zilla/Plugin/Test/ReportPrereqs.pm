@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Test::ReportPrereqs;
 # ABSTRACT: Report on prerequisite versions during automated testing
-our $VERSION = '0.014'; # VERSION
+our $VERSION = '0.015'; # VERSION
 
 use Dist::Zilla 4 ();
 
@@ -50,7 +50,6 @@ sub register_prereqs {
         'File::Spec'          => 0,
         'List::Util'          => 0,
         'Scalar::Util'        => 0,
-        'version'             => 0.77, # based on CPAN::Meta::Requirements
     );
 
     $self->zilla->register_prereqs(
@@ -58,9 +57,7 @@ sub register_prereqs {
             phase => 'test',
             type  => 'recommends',
         },
-        'CPAN::Meta'               => '0',
-        'CPAN::Meta::Prereqs'      => '0',
-        'CPAN::Meta::Requirements' => '2.120900',
+        'CPAN::Meta' => '2.120900',
     );
 }
 
@@ -175,7 +172,7 @@ __PACKAGE__->meta->make_immutable;
 #pod =head2 verify_prereqs
 #pod
 #pod When set, installed versions of all 'requires' prerequisites are verified
-#pod against those specified.  Defaults to true.
+#pod against those specified.  Defaults to true, but requires CPAN::Meta to be installed.
 #pod
 #pod =head1 SEE ALSO
 #pod
@@ -199,7 +196,7 @@ Dist::Zilla::Plugin::Test::ReportPrereqs - Report on prerequisite versions durin
 
 =head1 VERSION
 
-version 0.014
+version 0.015
 
 =head1 SYNOPSIS
 
@@ -250,7 +247,7 @@ modules from the report (if you had a reason to do so).
 =head2 verify_prereqs
 
 When set, installed versions of all 'requires' prerequisites are verified
-against those specified.  Defaults to true.
+against those specified.  Defaults to true, but requires CPAN::Meta to be installed.
 
 =head1 SEE ALSO
 
@@ -347,15 +344,24 @@ use ExtUtils::MakeMaker;
 use File::Spec::Functions;
 use List::Util qw/max first/;
 use Scalar::Util qw/blessed/;
-use version;
+
+# from $version::LAX
+my $lax_version_re =
+    qr/(?: undef | (?: (?:[0-9]+) (?: \. | (?:\.[0-9]+) (?:_[0-9]+)? )?
+            |
+            (?:\.[0-9]+) (?:_[0-9]+)?
+        ) | (?:
+            v (?:[0-9]+) (?: (?:\.[0-9]+)+ (?:_[0-9]+)? )?
+            |
+            (?:[0-9]+)? (?:\.[0-9]+){2,} (?:_[0-9]+)?
+        )
+    )/x;
 
 # hide optional CPAN::Meta modules from prereq scanner
 # and check if they are available
 my $cpan_meta = "CPAN::Meta";
 my $cpan_meta_pre = "CPAN::Meta::Prereqs";
-my $cpan_meta_req = "CPAN::Meta::Requirements";
-my $HAS_CPAN_META = eval "require $cpan_meta"; ## no critic
-my $HAS_CPAN_META_REQ = eval "require $cpan_meta_req; $cpan_meta_req->VERSION('2.120900')";
+my $HAS_CPAN_META = eval "require $cpan_meta; $cpan_meta->VERSION('2.120900')" && eval "require $cpan_meta_pre"; ## no critic
 
 # Verify requirements?
 my $DO_VERIFY_PREREQS = INSERT_VERIFY_PREREQS_CONFIG;
@@ -450,8 +456,8 @@ for my $phase ( qw(configure build test runtime develop) ) {
                 $have = "undef" unless defined $have;
                 push @reports, [$mod, $want, $have];
 
-                if ( $DO_VERIFY_PREREQS && $type eq 'requires' ) {
-                    if ( ! defined eval { version->parse($have) } ) {
+                if ( $DO_VERIFY_PREREQS && $HAS_CPAN_META && $type eq 'requires' ) {
+                    if ( $have !~ /\a$lax_version_re\Z/ ) {
                         push @dep_errors, "$mod version '$have' cannot be parsed ($req_string)";
                     }
                     elsif ( ! $full_prereqs->requirements_for( $phase, $type )->accepts_module( $mod => $have ) ) {

@@ -1,5 +1,17 @@
 Revision history for Dist-Zilla-Plugin-Test-ReportPrereqs
 
+0.015     2014-07-29 13:28:06-04:00 America/New_York
+
+  [Changed]
+
+  - removes dependency on version.pm and uses its regular expression
+    instead.
+
+  [Fixed]
+
+  - generated test file no longer fatal if verifying prereqs without
+    CPAN::Meta installed.
+
 0.014     2014-07-17 18:09:03-04:00 America/New_York
 
   [Changed]

@@ -3,7 +3,7 @@ NAME
     versions during automated testing
 
 VERSION
-    version 0.014
+    version 0.015
 
 SYNOPSIS
       # in dist.ini
@@ -45,7 +45,8 @@ CONFIGURATION
 
   verify_prereqs
     When set, installed versions of all 'requires' prerequisites are
-    verified against those specified. Defaults to true.
+    verified against those specified. Defaults to true, but requires
+    CPAN::Meta to be installed.
 
 SEE ALSO
     Other Dist::Zilla::Plugins do similar things in slightly different ways
