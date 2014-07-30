@@ -46,7 +46,6 @@ do { my $x = {
                                    'Dist::Zilla::Tester' => '0',
                                    'ExtUtils::MakeMaker' => '0',
                                    'File::Spec' => '0',
-                                   'File::Spec::Functions' => '0',
                                    'File::pushd' => '0',
                                    'List::Util' => '0',
                                    'Path::Class' => '0',

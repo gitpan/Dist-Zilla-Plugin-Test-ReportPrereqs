@@ -38,7 +38,6 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Tester" => 0,
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
-    "File::Spec::Functions" => 0,
     "File::pushd" => 0,
     "List::Util" => 0,
     "Path::Class" => 0,
@@ -46,7 +45,7 @@ my %WriteMakefileArgs = (
     "Test::Harness" => 0,
     "Test::More" => "0.96"
   },
-  "VERSION" => "0.016",
+  "VERSION" => "0.017",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -66,7 +65,6 @@ my %FallbackPrereqs = (
   "Dist::Zilla::Tester" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
-  "File::Spec::Functions" => 0,
   "File::pushd" => 0,
   "List::Util" => 0,
   "Moose" => 0,
