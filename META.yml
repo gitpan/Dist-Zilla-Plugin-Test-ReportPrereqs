@@ -3,15 +3,12 @@ abstract: 'Report on prerequisite versions during automated testing'
 author:
   - 'David Golden <dagolden@cpan.org>'
 build_requires:
+  CPAN::Meta: '0'
   Capture::Tiny: '0'
-  Cwd: '0'
   Dist::Zilla::Tester: '0'
   ExtUtils::MakeMaker: '0'
   File::Spec: '0'
   File::pushd: '0'
-  List::Util: '0'
-  Path::Class: '0'
-  Scalar::Util: '0'
   Test::Harness: '0'
   Test::More: '0.96'
 configure_requires:
@@ -34,7 +31,7 @@ no_index:
 provides:
   Dist::Zilla::Plugin::Test::ReportPrereqs:
     file: lib/Dist/Zilla/Plugin/Test/ReportPrereqs.pm
-    version: '0.017'
+    version: '0.018'
 requires:
   Data::Dumper: '0'
   Data::Section: '0.200002'
@@ -52,7 +49,7 @@ resources:
   bugtracker: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs/issues
   homepage: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs
   repository: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs.git
-version: '0.017'
+version: '0.018'
 x_authority: cpan:DAGOLDEN
 x_contributors:
   - 'Brendan Byrd <Perl@ResonatorSoft.org>'

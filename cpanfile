@@ -12,15 +12,12 @@ requires "strict" => "0";
 requires "warnings" => "0";
 
 on 'test' => sub {
+  requires "CPAN::Meta" => "0";
   requires "Capture::Tiny" => "0";
-  requires "Cwd" => "0";
   requires "Dist::Zilla::Tester" => "0";
   requires "ExtUtils::MakeMaker" => "0";
   requires "File::Spec" => "0";
   requires "File::pushd" => "0";
-  requires "List::Util" => "0";
-  requires "Path::Class" => "0";
-  requires "Scalar::Util" => "0";
   requires "Test::Harness" => "0";
   requires "Test::More" => "0.96";
 };
@@ -35,7 +32,7 @@ on 'configure' => sub {
 
 on 'develop' => sub {
   requires "Dist::Zilla" => "5";
-  requires "Dist::Zilla::PluginBundle::DAGOLDEN" => "0.060";
+  requires "Dist::Zilla::PluginBundle::DAGOLDEN" => "0.069";
   requires "File::Spec" => "0";
   requires "File::Temp" => "0";
   requires "IO::Handle" => "0";

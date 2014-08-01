@@ -33,19 +33,16 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
+    "CPAN::Meta" => 0,
     "Capture::Tiny" => 0,
-    "Cwd" => 0,
     "Dist::Zilla::Tester" => 0,
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
     "File::pushd" => 0,
-    "List::Util" => 0,
-    "Path::Class" => 0,
-    "Scalar::Util" => 0,
     "Test::Harness" => 0,
     "Test::More" => "0.96"
   },
-  "VERSION" => "0.017",
+  "VERSION" => "0.018",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -53,8 +50,8 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
+  "CPAN::Meta" => 0,
   "Capture::Tiny" => 0,
-  "Cwd" => 0,
   "Data::Dumper" => 0,
   "Data::Section" => "0.200002",
   "Dist::Zilla" => 4,
@@ -66,10 +63,7 @@ my %FallbackPrereqs = (
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
   "File::pushd" => 0,
-  "List::Util" => 0,
   "Moose" => 0,
-  "Path::Class" => 0,
-  "Scalar::Util" => 0,
   "Sub::Exporter::ForMethods" => 0,
   "Test::Harness" => 0,
   "Test::More" => "0.96",

@@ -7,7 +7,7 @@ do { my $x = {
        'develop' => {
                       'requires' => {
                                       'Dist::Zilla' => '5',
-                                      'Dist::Zilla::PluginBundle::DAGOLDEN' => '0.060',
+                                      'Dist::Zilla::PluginBundle::DAGOLDEN' => '0.069',
                                       'File::Spec' => '0',
                                       'File::Temp' => '0',
                                       'IO::Handle' => '0',
@@ -41,15 +41,12 @@ do { my $x = {
                                      'CPAN::Meta' => '2.120900'
                                    },
                    'requires' => {
+                                   'CPAN::Meta' => '0',
                                    'Capture::Tiny' => '0',
-                                   'Cwd' => '0',
                                    'Dist::Zilla::Tester' => '0',
                                    'ExtUtils::MakeMaker' => '0',
                                    'File::Spec' => '0',
                                    'File::pushd' => '0',
-                                   'List::Util' => '0',
-                                   'Path::Class' => '0',
-                                   'Scalar::Util' => '0',
                                    'Test::Harness' => '0',
                                    'Test::More' => '0.96'
                                  }
