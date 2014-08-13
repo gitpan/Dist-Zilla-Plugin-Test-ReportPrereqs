@@ -14,7 +14,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: '6.17'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.142060'
+generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.140640'
 license: apache
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -31,7 +31,7 @@ no_index:
 provides:
   Dist::Zilla::Plugin::Test::ReportPrereqs:
     file: lib/Dist/Zilla/Plugin/Test/ReportPrereqs.pm
-    version: '0.018'
+    version: '0.019'
 requires:
   Data::Dumper: '0'
   Data::Section: '0.200002'
@@ -49,7 +49,7 @@ resources:
   bugtracker: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs/issues
   homepage: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs
   repository: https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs.git
-version: '0.018'
+version: '0.019'
 x_authority: cpan:DAGOLDEN
 x_contributors:
   - 'Brendan Byrd <Perl@ResonatorSoft.org>'

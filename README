@@ -3,7 +3,7 @@ NAME
     versions during automated testing
 
 VERSION
-    version 0.018
+    version 0.019
 
 SYNOPSIS
       # in dist.ini
@@ -38,6 +38,8 @@ CONFIGURATION
     An "include" attribute can be specified (multiple times) to add modules
     to the report. This can be useful if there is a module in the dependency
     chain that is problematic but is not directly required by this project.
+    These modules will be listed in an "Other Modules" section at the end of
+    the report.
 
   exclude
     An "exclude" attribute can be specified (multiple times) to remove

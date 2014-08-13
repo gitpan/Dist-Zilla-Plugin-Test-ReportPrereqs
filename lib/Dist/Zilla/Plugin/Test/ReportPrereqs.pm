@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Test::ReportPrereqs;
 # ABSTRACT: Report on prerequisite versions during automated testing
-our $VERSION = '0.018'; # VERSION
+our $VERSION = '0.019'; # VERSION
 
 use Dist::Zilla 4 ();
 
@@ -161,6 +161,8 @@ __PACKAGE__->meta->make_immutable;
 #pod An C<include> attribute can be specified (multiple times) to add modules
 #pod to the report.  This can be useful if there is a module in the dependency
 #pod chain that is problematic but is not directly required by this project.
+#pod These modules will be listed in an "Other Modules" section at the end of
+#pod the report.
 #pod
 #pod =head2 exclude
 #pod
@@ -194,7 +196,7 @@ Dist::Zilla::Plugin::Test::ReportPrereqs - Report on prerequisite versions durin
 
 =head1 VERSION
 
-version 0.018
+version 0.019
 
 =head1 SYNOPSIS
 
@@ -236,6 +238,8 @@ register_prereqs
 An C<include> attribute can be specified (multiple times) to add modules
 to the report.  This can be useful if there is a module in the dependency
 chain that is problematic but is not directly required by this project.
+These modules will be listed in an "Other Modules" section at the end of
+the report.
 
 =head2 exclude
 
@@ -292,6 +296,8 @@ L<https://github.com/dagolden/Dist-Zilla-Plugin-Test-ReportPrereqs>
 David Golden <dagolden@cpan.org>
 
 =head1 CONTRIBUTORS
+
+=for stopwords Brendan Byrd Karen Etheridge Kent Fredric Randy Stauner Yanick Champoux
 
 =over 4
 
@@ -401,12 +407,6 @@ INSERT_EXCLUDED_MODULES_HERE
 # Add static prereqs to the included modules list
 my $static_prereqs = do 'INSERT_DD_FILENAME_HERE';
 
-### XXX: Assume these are Runtime Requires
-my $static_prereqs_requires = $static_prereqs->{runtime}{requires};
-for my $mod (@include) {
-    $static_prereqs_requires->{$mod} = 0 unless exists $static_prereqs_requires->{$mod};
-}
-
 # Merge all prereqs (either with ::Prereqs or a hashref)
 my $full_prereqs = _merge_prereqs(
     ( $HAS_CPAN_META ? $cpan_meta_pre->new : {} ),
@@ -428,11 +428,16 @@ my @full_reports;
 my @dep_errors;
 my $req_hash = $HAS_CPAN_META ? $full_prereqs->as_string_hash : $full_prereqs;
 
-for my $phase ( qw(configure build test runtime develop) ) {
+# Add static includes into a fake section
+for my $mod (@include) {
+    $req_hash->{other}{modules}{$mod} = 0;
+}
+
+for my $phase ( qw(configure build test runtime develop other) ) {
     next unless $req_hash->{$phase};
     next if ($phase eq 'develop' and not $ENV{AUTHOR_TESTING});
 
-    for my $type ( qw(requires recommends suggests conflicts) ) {
+    for my $type ( qw(requires recommends suggests conflicts modules) ) {
         next unless $req_hash->{$phase}{$type};
 
         my $title = ucfirst($phase).' '.ucfirst($type);
